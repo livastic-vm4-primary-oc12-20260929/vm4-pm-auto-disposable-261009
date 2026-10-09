@@ -1,0 +1,25 @@
+name: VM4 DevEngines Impact
+
+on:
+  pull_request:
+    branches:
+      - vm4-devengines-impact-base-261009
+
+permissions:
+  contents: read
+
+jobs:
+  vm4-devengines-impact-gate:
+    name: vm4-devengines-impact-gate
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Enforce package runtime policy
+        working-directory: vm4-pm-auto-261008
+        run: |
+          node --version
+          npm --version
+          npm install --ignore-scripts --package-lock=false
